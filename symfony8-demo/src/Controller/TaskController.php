@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Dto\TaskDto;
-use App\Entity\Task;
 use App\Form\Type\TaskType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,14 +22,14 @@ class TaskController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $form->isFinished()) {
             $task = $form->getData();
 
             dd($task);
         }
 
         return $this->render('task/new.html.twig', [
-            'form' => $form
+            'form' => $form->getStepForm(),
         ]);
     }
 }

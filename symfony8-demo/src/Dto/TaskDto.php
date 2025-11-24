@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class TaskDto
 {
+    public string $currentStep = 'basic'; // IMPORTANT
     #[Assert\NotBlank(message: 'Task name cannot be empty.', groups: ['basic'])]
     #[Assert\Length(
         min: 3,
